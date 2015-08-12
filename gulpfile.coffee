@@ -1,58 +1,61 @@
 
 _ = require 'lodash'
-st = require 'st'
 http = require 'http'
+lrload = require 'livereactload'
+watchify = require 'watchify'
 browserify = require 'browserify'
 
 gulp = require 'gulp'
+gulp_util = require 'gulp-util'
 gulp_source = require 'vinyl-source-stream'
-gulp_livereload = require 'gulp-livereload'
+gulp_webserver = require 'gulp-webserver'
 
-browserifyOpts = {
-  transform: ['coffee-reactify', 'aliasify']
-  extensions: ['.coffee']
-}
+# from https://github.com/milankinen/livereactload/blob/master/examples/05-build-systems/gulpfile.js
+gulp.task 'fe:scripts', do ->
+  browserifyOpts = {
+    entries: ['scripts/app.coffee']
+    transform: ['coffee-reactify', 'aliasify', 'livereactload']
+    extensions: ['.coffee']
+    cache: {}
+    packageCache: {}
+    fullPaths: true # for watchify
+  }
 
-gulp.task 'fe:scriptsVendor', ->
-  browserify('scripts/vendor.coffee', browserifyOpts)
-    .ignore('jquery')
-    .bundle()
-    .pipe gulp_source 'vendor.js'
-    .pipe gulp.dest 'public/scripts'
-    .pipe gulp_livereload()
+  lrload.monitor 'public/scripts/app.js', displayNotification: true
+  rebundle = ->
+    gulp_util.log 'Update JavaScript bundle'
+    watcher.bundle()
+      .on 'error', gulp_util.log
+      .pipe gulp_source 'app.js'
+      .pipe gulp.dest 'public/scripts'
+  bundler = browserify browserifyOpts
+  watcher = watchify(bundler).on('error', gulp_util.log).on 'update', rebundle
 
-gulp.task 'fe:scripts', ->
-  browserify('scripts/app.coffee', browserifyOpts)
-    .bundle()
-    .pipe gulp_source 'app.js'
-    .pipe gulp.dest 'public/scripts'
-    .pipe gulp_livereload()
+  ->
+    rebundle()
 
 gulp.task 'fe:styles', ->
   gulp_sass = require 'gulp-sass'
   gulp.src 'styles/app.sass'
     .pipe gulp_sass()
     .pipe gulp.dest 'public/styles'
-    .pipe gulp_livereload()
 
 gulp.task 'fe:assets', ->
   gulp.src 'assets/**/*'
     .pipe gulp.dest 'public'
-    .pipe gulp_livereload()
 
 gulp.task 'fe:watch', ->
-  gulp_livereload.listen()
-  gulp.watch('scripts/vendor.coffee', ['fe:scriptsVendor'])
-  gulp.watch('scripts/app.coffee', ['fe:scripts'])
+  gulp.watch('scripts/**/*', ['fe:scripts'])
   gulp.watch('styles/**/*', ['fe:styles'])
   gulp.watch('assets/**/*', ['fe:assets'])
+  gulp.src('./public').pipe gulp_webserver(
+    port: 9090
+    livereload:
+      enable: true
+      filter: (fileName) ->
+        return false if fileName.match /\.js$/
+        true
+  )
 
-gulp.task 'fe:staticServer', (done) ->
-  http.createServer(
-    st(path: __dirname + '/public', index: 'index.html', cache: false)
-  ).listen (process.env.PORT or '9090'), ->
-    console.log 'Static server listening at 9090'
-    done()
-
-gulp.task 'fe:build', ['fe:scriptsVendor', 'fe:scripts', 'fe:styles', 'fe:assets']
-gulp.task 'default', ['fe:build', 'fe:staticServer', 'fe:watch']
+gulp.task 'fe:build', ['fe:scripts', 'fe:styles', 'fe:assets']
+gulp.task 'default', ['fe:build', 'fe:watch']
