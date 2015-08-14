@@ -2,7 +2,7 @@
   "name": "react-seed",
   "version": "0.0.1",
   "description": "",
-  "main": "",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp"
@@ -28,6 +28,7 @@
     "browserify": "11.0.1",
     "coffee-reactify": "4.0.0",
     "coffee-script": "1.9.3",
+    "event-stream": "^3.3.1",
     "gulp": "3.9.0",
     "gulp-livereload": "3.8.0",
     "gulp-sass": "2.0.4",
@@ -43,5 +44,9 @@
       "../moment": "moment",
       "underscore": "lodash"
     }
+  },
+  "window": {
+    "width": 790,
+    "toolbar": false
   }
 }
