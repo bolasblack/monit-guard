@@ -15,6 +15,9 @@ gulp_webserver = require 'gulp-webserver'
 
 # from https://github.com/milankinen/livereactload/blob/master/examples/05-build-systems/gulpfile.js
 gulp.task 'fe:scripts', do ->
+  gulpCommand = process.argv[2]
+  return unless _.startsWith(gulpCommand, 'fe:') or gulpCommand in ['default', undefined]
+
   browserifyOpts = {
     entries: ['scripts/app.coffee']
     transform: ['coffee-reactify', 'aliasify', 'livereactload']
