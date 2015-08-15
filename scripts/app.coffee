@@ -22,7 +22,7 @@ App = React.createClass(
     servers.fetch().then =>
       return if @_stopTimer
       @setState serverFetching: false
-      @_timer = setTimeout @_update, 1000 * 60 * 1
+      @_timer = setTimeout @_update, 1000 * 30
 
   _renderContent: ->
     if servers.length and @state.serverFetching
