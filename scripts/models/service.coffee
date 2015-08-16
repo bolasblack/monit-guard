@@ -6,10 +6,11 @@ class Service extends Model
 
   _safeGet: (path, options = {}) ->
     result = _.get(@attributes, path)
-    if result? and options.isNumber
+    return 'N/A' unless result?
+    if options.isNumber
       Number result
     else
-      'N/A'
+      result
 
   name:      -> @_safeGet 'name'
   status:    -> @_safeGet 'status', isNumber: true
