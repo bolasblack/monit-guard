@@ -7,12 +7,12 @@ module.exports = Filesystem = React.createClass(
     <div className="segment filesystems">
       <h3>Filesystem</h3>
       <ul className="clearfix">
-        {@props.filesystems.map (fs, index) ->
+        {@props.filesystems.map (fs, index) =>
           <li key={index}>
             <strong title="(#{fs.usage()} of #{fs.total()})">
-              <span class="dot status #{@_status fs, 'status', 0}">&middot;</span>
-              <span class="dot monitored #{@_status fs, 'monitored'}">&middot;</span>
-              {fs.name()}
+              <span className="dot status #{@_status fs, 'status', 0}">&middot;</span>
+              <span className="dot monitored #{@_status fs, 'monitored'}">&middot;</span>
+              <a href={fs.url()}>{fs.name()}</a>
             </strong>
             {fs.percent()}%
           </li>

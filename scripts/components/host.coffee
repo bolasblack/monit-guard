@@ -16,7 +16,7 @@ module.exports = Host = React.createClass(
             <strong>
               <span class="dot status #{@_status host, 'status', 0}">&middot;</span>
               <span class="dot monitored #{@_status host, 'monitored'}">&middot;</span>
-              {host.name()}
+              <a href={host.url()} target="_blank">{host.name()}</a>
               {@_alertNotMonitored host}
             </strong>
             <small>

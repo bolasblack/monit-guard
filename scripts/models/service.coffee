@@ -12,9 +12,14 @@ class Service extends Model
     else
       result
 
-  name:      -> @_safeGet 'name'
+  name:      -> @attributes['name']
   status:    -> @_safeGet 'status', isNumber: true
   monitored: -> @_safeGet 'monitor', isNumber: true
+  url:       ->
+    if @collection
+      @collection.server.get('url').replace(/\/?$/, '/') + @name()
+    else
+      @server.get('url').replace(/\/?$/, '/') + @name()
 
 class Services extends Collection
   @fromServer: (server) ->

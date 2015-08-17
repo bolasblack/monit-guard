@@ -16,7 +16,7 @@ module.exports = Process = React.createClass(
             <strong>
               <span className="dot status #{@_status process, 'status', 0}">&middot;</span>
               <span className="dot monitored #{@_status process, 'monitored'}">&middot;</span>
-              {process.get 'name'}
+              <a href={process.url()}>{process.name()}</a>
               {@_alertNotMonitored process}
             </strong>
 
