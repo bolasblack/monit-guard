@@ -5,7 +5,7 @@ module.exports = Host = React.createClass(
 
   _alertNotMonitored: (host) ->
     if host.monitored() isnt 1
-      <span class="label warning">NOT MONITORED</span>
+      <span className="label warning">NOT MONITORED</span>
 
   render: ->
     <div className="segment hosts">

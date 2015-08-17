@@ -5,7 +5,7 @@ module.exports = Process = React.createClass(
 
   _alertNotMonitored: (process) ->
     if process.monitored() isnt 1
-      <span class="label warning">NOT MONITORED</span>
+      <span className="label warning">NOT MONITORED</span>
 
   render: ->
     <div className="segment processes">
