@@ -45,7 +45,7 @@ class System extends Service
 class Host extends Service
   @TYPE = 4
 
-  responseTime: -> @get('port').responsetime
+  responseTime: -> @_safeGet('icmp.responsetime')
 
 class Process extends Service
   @TYPE = 3

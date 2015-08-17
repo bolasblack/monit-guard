@@ -32,6 +32,7 @@ class Server extends Model
       when 'info'        then @_getCategory 'server'
       when 'platform'    then @_getCategory 'platform'
       when 'system'      then @_getCategory 'service', System.TYPE
+      when 'hosts'       then @_getCategory 'service', Host.TYPE
       when 'processes'   then @_getCategory 'service', Process.TYPE, true
       when 'filesystems' then @_getCategory 'service', Filesystem.TYPE, true
 

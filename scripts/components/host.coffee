@@ -11,11 +11,11 @@ module.exports = Host = React.createClass(
     <div className="segment hosts">
       <h3>Hosts</h3>
       <ul>
-        {@props.hosts.map (host, index) ->
+        {@props.hosts.map (host, index) =>
           <li key={index}>
             <strong>
-              <span class="dot status #{@_status host, 'status', 0}">&middot;</span>
-              <span class="dot monitored #{@_status host, 'monitored'}">&middot;</span>
+              <span className="dot status #{@_status host, 'status', 0}">&middot;</span>
+              <span className="dot monitored #{@_status host, 'monitored'}">&middot;</span>
               <a href={host.url()} target="_blank">{host.name()}</a>
               {@_alertNotMonitored host}
             </strong>
