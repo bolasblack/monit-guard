@@ -1,7 +1,7 @@
 
 module.exports = Filesystem = React.createClass(
-  _status: (item, propertyName, expectValue = 1) ->
-    if Number(item[propertyName]()) is expectValue then 'running' else 'failure'
+  _status: (item, propertyName) ->
+    if item[propertyName] then 'running' else 'failure'
 
   render: ->
     <div className="segment filesystems">
@@ -9,12 +9,12 @@ module.exports = Filesystem = React.createClass(
       <ul className="clearfix">
         {@props.filesystems.map (fs, index) =>
           <li key={index}>
-            <strong title="(#{fs.usage()} of #{fs.total()})">
-              <span className="dot status #{@_status fs, 'status', 0}">&middot;</span>
-              <span className="dot monitored #{@_status fs, 'monitored'}">&middot;</span>
-              <a href={fs.url()}>{fs.name()}</a>
+            <strong title="(#{fs.block.usage} of #{fs.block.total})">
+              <span className="dot status #{@_status fs, 'status'}">&middot;</span>
+              <span className="dot monitored #{@_status fs, 'monitor'}">&middot;</span>
+              <a href={fs.url}>{fs.name}</a>
             </strong>
-            {fs.percent()}%
+            {fs.block.percent}%
           </li>
         }
       </ul>

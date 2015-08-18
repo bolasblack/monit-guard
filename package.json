@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "start": "NODE_ENV=development gulp",
+    "build": "NODE_ENV=producetion gulp build"
   },
   "keywords": [
     "monit"
@@ -13,17 +14,20 @@
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "backbone": "1.2.1",
     "bluebird": "2.9.34",
     "bootstrap-sass": "3.3.5",
-    "jquery": "^2.1.4",
-    "lodash": "3.10.0",
     "moment": "2.10.6",
+    "ramda": "^0.17.1",
     "react": "0.13.3",
     "react-bootstrap": "0.24.3",
-    "zepto": "madrobby/zepto"
+    "react-redux": "^0.8.2",
+    "redux": "^1.0.1",
+    "redux-thunk": "^0.1.0",
+    "whatwg-fetch": "^0.9.0",
+    "xml2js": "^0.4.10"
   },
   "devDependencies": {
+    "lodash": "3.10.0",
     "aliasify": "1.7.2",
     "browserify": "11.0.1",
     "coffee-reactify": "4.0.0",
@@ -31,18 +35,18 @@
     "event-stream": "^3.3.1",
     "gulp": "3.9.0",
     "gulp-livereload": "3.8.0",
+    "gulp-preprocess": "^1.2.0",
     "gulp-sass": "2.0.4",
     "gulp-util": "^3.0.6",
     "gulp-webserver": "^0.9.1",
     "livereactload": "^0.6.0",
-    "st": "0.5.5",
+    "redux-devtools": "^1.0.2",
     "vinyl-source-stream": "1.1.0",
     "watchify": "^3.3.1"
   },
   "aliasify": {
     "aliases": {
-      "../moment": "moment",
-      "underscore": "lodash"
+      "../moment": "moment"
     }
   },
   "window": {

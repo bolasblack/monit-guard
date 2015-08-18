@@ -1,10 +1,11 @@
+utils = require 'app/utils'
 
 module.exports = Process = React.createClass(
-  _status: (item, propertyName, expectValue = 1) ->
-    if Number(item[propertyName]()) is expectValue then 'running' else 'failure'
+  _status: (item, propertyName) ->
+    if item[propertyName] then 'running' else 'failure'
 
   _alertNotMonitored: (process) ->
-    if process.monitored() isnt 1
+    unless process.monitor
       <span className="label warning">NOT MONITORED</span>
 
   render: ->
@@ -14,16 +15,16 @@ module.exports = Process = React.createClass(
         {@props.processes.map (process, index) =>
           <li key={index}>
             <strong>
-              <span className="dot status #{@_status process, 'status', 0}">&middot;</span>
-              <span className="dot monitored #{@_status process, 'monitored'}">&middot;</span>
-              <a href={process.url()}>{process.name()}</a>
+              <span className="dot status #{@_status process, 'status'}">&middot;</span>
+              <span className="dot monitored #{@_status process, 'monitor'}">&middot;</span>
+              <a href={process.url}>{process.name}</a>
               {@_alertNotMonitored process}
             </strong>
 
             <small>
-              <span className="info"><span className="label">cpu:    </span>{process.cpu()}</span>
-              <span className="info"><span className="label">memory: </span>{process.memory()}</span>
-              <span className="info"><span className="label">uptime: </span>{process.humanizeUptime()}</span>
+              <span className="info"><span className="label">cpu:    </span>{process.cpu.percent}</span>
+              <span className="info"><span className="label">memory: </span>{process.memory.percent}</span>
+              <span className="info"><span className="label">uptime: </span>{utils.humanizeUptime process.uptime}</span>
             </small>
           </li>
         }

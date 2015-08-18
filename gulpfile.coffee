@@ -19,7 +19,7 @@ gulp.task 'fe:scripts', do ->
   return unless _.startsWith(gulpCommand, 'fe:') or gulpCommand in ['default', undefined]
 
   browserifyOpts = {
-    entries: ['scripts/app.coffee']
+    entries: ['scripts/index.coffee']
     transform: ['coffee-reactify', 'aliasify', 'livereactload']
     extensions: ['.coffee']
     cache: {}

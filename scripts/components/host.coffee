@@ -1,10 +1,10 @@
 
 module.exports = Host = React.createClass(
-  _status: (item, propertyName, expectValue = 1) ->
-    if Number(item[propertyName]()) is expectValue then 'running' else 'failure'
+  _status: (item, propertyName) ->
+    if item[propertyName] then 'running' else 'failure'
 
   _alertNotMonitored: (host) ->
-    if host.monitored() isnt 1
+    unless host.monitor
       <span className="label warning">NOT MONITORED</span>
 
   render: ->
@@ -14,13 +14,16 @@ module.exports = Host = React.createClass(
         {@props.hosts.map (host, index) =>
           <li key={index}>
             <strong>
-              <span className="dot status #{@_status host, 'status', 0}">&middot;</span>
-              <span className="dot monitored #{@_status host, 'monitored'}">&middot;</span>
-              <a href={host.url()} target="_blank">{host.name()}</a>
+              <span className="dot status #{@_status host, 'status'}">&middot;</span>
+              <span className="dot monitored #{@_status host, 'monitor'}">&middot;</span>
+              <a href={host.url} target="_blank">{host.name}</a>
               {@_alertNotMonitored host}
             </strong>
             <small>
-              <span class="info"><span class="label">response time: </span>{host.responseTime()}</span>
+              <span className="info">
+                <span className="label">response time: </span>
+                {host.icmp.responsetime}
+              </span>
             </small>
           </li>
         }
