@@ -4,8 +4,18 @@ window.Promise = require 'bluebird'
 window.React = require 'react/addons'
 require 'whatwg-fetch'
 
+# @if DEBUG
+global.__DEBUG__ = true
+# @endif
+# @if DEV
+global.__DEV__ = true
+# @endif
+# @if PROD
+global.__PROD__ = true
+# @endif
+
 R.assocAppend = (key, value, obj) ->
-  R.assoc key, R.append(obj[key], value), obj
+  R.assoc key, R.append(value, obj[key]), obj
 
 R.assocDrop = (key, fn, obj) ->
   R.assoc key, R.dropWhile(fn, obj[key]), obj

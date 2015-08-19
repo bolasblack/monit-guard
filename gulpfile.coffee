@@ -16,11 +16,10 @@ gulp_webserver = require 'gulp-webserver'
 # from https://github.com/milankinen/livereactload/blob/master/examples/05-build-systems/gulpfile.js
 gulp.task 'fe:scripts', do ->
   gulpCommand = process.argv[2]
-  return unless _.startsWith(gulpCommand, 'fe:') or gulpCommand in ['default', undefined]
+  return unless _.startsWith(gulpCommand, 'fe:') or gulpCommand in ['default', '--debug', undefined]
 
   browserifyOpts = {
     entries: ['scripts/index.coffee']
-    transform: ['coffee-reactify', 'aliasify', 'livereactload']
     extensions: ['.coffee']
     cache: {}
     packageCache: {}
@@ -34,7 +33,15 @@ gulp.task 'fe:scripts', do ->
       .on 'error', gulp_util.log
       .pipe gulp_source 'app.js'
       .pipe gulp.dest 'public/scripts'
-  bundler = browserify browserifyOpts
+  bundler = browserify(browserifyOpts)
+    .transform require('preprocessify')({
+      DEBUG: _.contains(process.argv, '--debug')
+      DEV: process.env.NODE_ENV isnt 'production'
+      PROD: process.env.NODE_ENV is 'production'
+    }, type: 'coffee', includeExtensions: ['.coffee'])
+    .transform 'coffee-reactify'
+    .transform 'aliasify'
+    .transform 'livereactload'
   watcher = watchify(bundler).on('error', gulp_util.log).on 'update', rebundle
 
   ->

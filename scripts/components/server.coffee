@@ -1,15 +1,15 @@
 {PropTypes} = React
+utils = require 'app/utils'
 
 module.exports = Server = React.createClass(
   _status: (item, keyPath) ->
     if R.assocPath keyPath.split('.'), item then 'running' else 'failure'
 
   _removeServer: (url) ->
-    (event) ->
+    (event) =>
       @props.onRemoveServer event, url
 
-  _renderSummary: ->
-    server = @props.server
+  _renderSummary: (server) ->
     if server.fetching
       <small>Loading...</small>
     else
@@ -18,7 +18,7 @@ module.exports = Server = React.createClass(
         <span className="info"><span className="label">cpu:    </span>{server.system.system.cpu.system}</span>
         <span className="info"><span className="label">memory: </span>{server.system.system.memory.percent}</span>
         <span className="info"><span className="label">swap:   </span>{server.system.system.swap.percent}</span>
-        <span className="info"><span className="label">uptime: </span>{server.system.system.humanizeUptime}</span>
+        <span className="info"><span className="label">uptime: </span>{utils.humanizeUptime server.info.uptime}</span>
       </small>
 
   render: ->
@@ -32,7 +32,7 @@ module.exports = Server = React.createClass(
         <a href="javascript:;" onClick={@_removeServer server.url}>&times;</a>
       </strong>
 
-      {@_renderSummary()}
+      {@_renderSummary server}
     </h2>
 )
 
