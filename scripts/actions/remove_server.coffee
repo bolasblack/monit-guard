@@ -4,5 +4,5 @@ module.exports = removeServer = (url) ->
   {type, url}
 
 removeServer.type = type
-removeServer.reducer = (store, action) ->
-  R.assocDrop 'servers', ((server) -> server.url is action.url), store
+removeServer.reducer = (state, action) ->
+  R.assocDrop 'servers', R.pipe(R.tap((server) -> console.log 'server', server), R.propEq('url', action.url), R.tap((result) -> console.log 'result', result)), state
