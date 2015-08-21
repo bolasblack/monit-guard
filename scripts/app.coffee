@@ -14,8 +14,8 @@ App = React.createClass(
       @props.dispatch actions.fetchServer server.url
 
   _addServer: ->
-    url = prompt 'Input monit url'
-    @props.dispatch actions.addServer url
+    return unless url = prompt 'Input monit url'
+    @props.dispatch actions.addServer R.trim url
 
   _removeServer: (event, url) ->
     @props.dispatch actions.removeServer url

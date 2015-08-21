@@ -4,12 +4,7 @@ utils = require 'app/utils'
 reducer = require 'app/reducer'
 
 defaultInitialState = do ->
-  try
-    urls = JSON.parse(localStorage.getItem 'urls') or []
-  catch
-    localStorage.removeItem 'urls'
-    urls = []
-
+  urls = utils.storage().get 'urls'
   servers: urls.map (url) ->
     url: url
     fetching: true

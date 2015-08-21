@@ -1,3 +1,4 @@
+utils = require 'app/utils'
 type = 'REMOVE_SERVER'
 
 module.exports = removeServer = (url) ->
@@ -5,4 +6,6 @@ module.exports = removeServer = (url) ->
 
 removeServer.type = type
 removeServer.reducer = (state, action) ->
-  R.assocDrop 'servers', R.pipe(R.tap((server) -> console.log 'server', server), R.propEq('url', action.url), R.tap((result) -> console.log 'result', result)), state
+  state = R.assocDrop 'servers', R.propEq('url', action.url), state
+  utils.storage().set 'urls', R.pluck 'url', state.servers
+  state
