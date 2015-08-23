@@ -2,7 +2,7 @@ utils = require 'app/utils'
 type = 'ADD_SERVER'
 
 module.exports = addServer = (url) ->
-  {type, url}
+  {type, url: url.replace /\/$/, ''}
 
 addServer.type = type
 addServer.reducer = (state, action) ->

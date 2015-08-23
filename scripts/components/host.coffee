@@ -1,3 +1,4 @@
+utils = require 'app/utils'
 
 module.exports = Host = React.createClass(
   _status: (item, propertyName) ->
@@ -7,22 +8,22 @@ module.exports = Host = React.createClass(
     unless host.monitor
       <span className="label warning">NOT MONITORED</span>
 
-  render: ->
+  _renderHosts: (hosts) ->
     <div className="segment hosts">
       <h3>Hosts</h3>
       <ul>
-        {@props.hosts.map (host, index) =>
+        {hosts.map (host, index) =>
           <li key={index}>
             <strong>
               <span className="dot status #{@_status host, 'status'}">&middot;</span>
               <span className="dot monitored #{@_status host, 'monitor'}">&middot;</span>
-              <a href={host.url} target="_blank">{host.name}</a>
+              <a href={"#{@props.server.url}/#{host.name}"} target="_blank">{host.name}</a>
               {@_alertNotMonitored host}
             </strong>
             <small>
               <span className="info">
                 <span className="label">response time: </span>
-                {host.icmp.responsetime}
+                {utils.safeGet host, 'icmp.responsetime'}
               </span>
             </small>
           </li>
@@ -30,4 +31,11 @@ module.exports = Host = React.createClass(
       </ul>
       <div className="clear"></div>
     </div>
+
+  render: ->
+    hosts = @props.server.hosts
+    if hosts and not R.isEmpty hosts
+      @_renderHosts hosts
+    else
+      <div></div>
 )

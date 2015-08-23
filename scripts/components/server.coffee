@@ -14,11 +14,11 @@ module.exports = Server = React.createClass(
       <small>Loading...</small>
     else
       <small>
-        <span className="info"><span className="label">load:   </span>{server.system.system.load.avg01}</span>
-        <span className="info"><span className="label">cpu:    </span>{server.system.system.cpu.system}</span>
-        <span className="info"><span className="label">memory: </span>{server.system.system.memory.percent}</span>
-        <span className="info"><span className="label">swap:   </span>{server.system.system.swap.percent}</span>
-        <span className="info"><span className="label">uptime: </span>{utils.humanizeUptime server.info.uptime}</span>
+        <span className="info"><span className="label">load:   </span>{utils.safeGet server, 'system.system.load.avg01'}</span>
+        <span className="info"><span className="label">cpu:    </span>{utils.safeGet server, 'system.system.cpu.system'}</span>
+        <span className="info"><span className="label">memory: </span>{utils.safeGet server, 'system.system.memory.percent'}</span>
+        <span className="info"><span className="label">swap:   </span>{utils.safeGet server, 'system.system.swap.percent'}</span>
+        <span className="info"><span className="label">uptime: </span>{utils.humanizeUptime server.info?.uptime}</span>
       </small>
 
   render: ->

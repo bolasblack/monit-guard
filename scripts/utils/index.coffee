@@ -6,6 +6,9 @@ module.exports = {
   humanizeUptime: (uptime) ->
     if uptime? then moment.duration(uptime, 'second').humanize() else 'N/A'
 
+  safeGet: (obj, keyPath, placeholder = 'N/A') ->
+    R.getPath(keyPath.split('.'), obj) or placeholder
+
   storage: ->
     get: (key) ->
       try

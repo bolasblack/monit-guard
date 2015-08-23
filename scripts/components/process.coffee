@@ -8,22 +8,22 @@ module.exports = Process = React.createClass(
     unless process.monitor
       <span className="label warning">NOT MONITORED</span>
 
-  render: ->
+  _renderProcesses: (processes) ->
     <div className="segment processes">
       <h3>Processes</h3>
       <ul>
-        {@props.processes.map (process, index) =>
+        {processes.map (process, index) =>
           <li key={index}>
             <strong>
               <span className="dot status #{@_status process, 'status'}">&middot;</span>
               <span className="dot monitored #{@_status process, 'monitor'}">&middot;</span>
-              <a href={process.url}>{process.name}</a>
+              <a href={"#{@props.server.url}/#{process.name}"}>{process.name}</a>
               {@_alertNotMonitored process}
             </strong>
 
             <small>
-              <span className="info"><span className="label">cpu:    </span>{process.cpu.percent}</span>
-              <span className="info"><span className="label">memory: </span>{process.memory.percent}</span>
+              <span className="info"><span className="label">cpu:    </span>{utils.safeGet process, 'cpu.percent'}</span>
+              <span className="info"><span className="label">memory: </span>{utils.safeGet process, 'memory.percent'}</span>
               <span className="info"><span className="label">uptime: </span>{utils.humanizeUptime process.uptime}</span>
             </small>
           </li>
@@ -31,4 +31,11 @@ module.exports = Process = React.createClass(
       </ul>
       <div className="clear"></div>
     </div>
+
+  render: ->
+    {processes} = @props.server
+    if processes and not R.isEmpty(processes)
+      @_renderProcesses processes
+    else
+      <div></div>
 )

@@ -25,3 +25,9 @@ describe 'Ramda', ->
       expect(replacer).calledOnce.and.have.property('args').eql [[3]]
       expect(predicate).calledThrice.and.have.property('args').eql [[1], [2], [3]]
       expect(result).eql [1, 2, 2]
+
+  # [String] -> {k: v} -> a
+  describe 'getPath', ->
+    it 'return the specified property with the given path', ->
+      result = R.getPath 'a.b.c'.split('.'), a: b: c: 1
+      expect(result).eql 1
