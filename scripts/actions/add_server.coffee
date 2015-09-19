@@ -1,4 +1,4 @@
-utils = require 'app/utils'
+utils = require 'src/utils'
 type = 'ADD_SERVER'
 
 module.exports = addServer = (url) ->

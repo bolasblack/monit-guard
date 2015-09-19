@@ -3,7 +3,7 @@ window.moment = require 'moment'
 window.Promise = require 'bluebird'
 window.React = require 'react/addons'
 require 'whatwg-fetch'
-require 'app/utils/ramda'
+require 'src/utils/ramda'
 
 # @if DEBUG
 global.__DEBUG__ = true

@@ -1,7 +1,7 @@
 xml2js = require 'xml2js'
-utils = require 'app/utils'
-requestServer = require 'app/actions/request_server'
-receiveServer = require 'app/actions/receive_server'
+utils = require 'src/utils'
+requestServer = require 'src/actions/request_server'
+receiveServer = require 'src/actions/receive_server'
 
 boolProps = 'monitor ssl'.split(' ')
 negateBoolProps = 'status'.split(' ')

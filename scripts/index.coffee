@@ -1,7 +1,7 @@
-require 'app/vendor'
+require 'src/vendor'
 {Provider} = require 'react-redux'
-newStore = require 'app/store'
-App = require 'app/app'
+newStore = require 'src/store'
+App = require 'src/app'
 store = newStore()
 
 # @if DEBUG

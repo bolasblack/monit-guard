@@ -1,4 +1,4 @@
-utils = require 'app/utils'
+utils = require 'src/utils'
 
 module.exports = Process = React.createClass(
   _status: (item, propertyName) ->

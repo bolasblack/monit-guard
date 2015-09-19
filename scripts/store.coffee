@@ -1,7 +1,7 @@
 {createStore, applyMiddleware, compose} = require 'redux'
 thunkMiddleware = require 'redux-thunk'
-utils = require 'app/utils'
-reducer = require 'app/reducer'
+utils = require 'src/utils'
+reducer = require 'src/reducer'
 
 defaultInitialState = do ->
   urls = utils.storage().get 'urls'

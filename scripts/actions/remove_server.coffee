@@ -1,4 +1,4 @@
-utils = require 'app/utils'
+utils = require 'src/utils'
 type = 'REMOVE_SERVER'
 
 module.exports = removeServer = (url) ->
