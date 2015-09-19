@@ -4,7 +4,7 @@ utils = require 'src/utils'
 reducer = require 'src/reducer'
 
 defaultInitialState = do ->
-  urls = utils.storage().get 'urls'
+  urls = utils.storage().get('urls') ? []
   servers: urls.map (url) ->
     url: url
     fetching: true

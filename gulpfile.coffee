@@ -10,6 +10,7 @@ ChildProcess = require 'child_process'
 
 gulp = require 'gulp'
 gulp_util = require 'gulp-util'
+gulp_coffee = require 'gulp-coffee'
 gulp_source = require 'vinyl-source-stream'
 gulp_webserver = require 'gulp-webserver'
 
@@ -71,11 +72,6 @@ gulp.task 'fe:watch', ->
         return false if fileName.match /\.js$/
         true
   )
-
-gulp.task 'nw:mac', ->
-  new Promise (resolve, reject) ->
-    ChildProcess.exec '/Applications/nwjs.app/Contents/MacOS/nwjs public', (err, stdout, stderr) ->
-      if err then resolve() else reject(err)
 
 gulp.task 'fe:build', ['fe:scripts', 'fe:styles', 'fe:assets']
 gulp.task 'default', ['fe:build', 'fe:watch']
