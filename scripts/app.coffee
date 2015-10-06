@@ -18,9 +18,9 @@ App = React.createClass(
     @props.dispatch actions.removeServer url
 
   render: ->
-    <div id="monittr">
+    <div className="servers">
       {@props.servers.map (server, index) =>
-        <div key={index} className="server rounded expanded">
+        <div key={index} className="server expanded">
           <Server server={server} onRemoveServer={@_removeServer} />
 
           <div className="content" style={{display: 'block'}}>

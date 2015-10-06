@@ -6,7 +6,7 @@ publicDir = sysPath.resolve(process.cwd(), 'public')
 isolateWindow = null
 menubar = require('menubar')(
   dir: publicDir
-  width: 950
+  width: 460
 )
 
 fnRunInWebContents = ->

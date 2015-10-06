@@ -24,15 +24,22 @@ module.exports = Server = React.createClass(
   render: ->
     server = @props.server
 
-    <h2 className="rounded">
-      <strong>
-        <span title="status" className="dot status #{@_status server, 'system.status'}">&middot;</span>
-        <span title="monitored" className="dot monitored #{@_status server, 'system.monitor'}">&middot;</span>
-        <a href={server.url}>{server.url}</a>
-        <a href="javascript:;" onClick={@_removeServer server.url}>&times;</a>
-      </strong>
+    <h2 className="server-summary">
+      <div className="run-info">
+        <div className="object">
+          <span title="status" className="dot status #{@_status server, 'system.status'}">&middot;</span>
+          <span title="monitored" className="dot monitored #{@_status server, 'system.monitor'}">&middot;</span>
+        </div>
+      </div>
 
-      {@_renderSummary server}
+      <div className="more-info">
+        <strong>
+          <a href={server.url}>{server.url}</a>
+          <a href="javascript:;" onClick={@_removeServer server.url}>&times;</a>
+        </strong>
+
+        {@_renderSummary server}
+      </div>
     </h2>
 )
 
