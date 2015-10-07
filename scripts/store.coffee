@@ -8,6 +8,7 @@ defaultInitialState = do ->
   servers: urls.map (url) ->
     url: url
     fetching: true
+    failed: false
 
 # @if DEBUG
 {devTools, persistState} = require 'redux-devtools'

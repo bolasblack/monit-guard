@@ -12,6 +12,8 @@ module.exports = Server = React.createClass(
   _renderSummary: (server) ->
     if server.fetching
       <small>Loading...</small>
+    else if server.fetch_failed
+      <small>Request failed, reloading...</small>
     else
       <small>
         <span className="info"><span className="label">load:   </span>{utils.safeGet server, 'system.system.load.avg01'}</span>

@@ -4,5 +4,6 @@ module.exports = {
   removeServer: require('src/actions/remove_server')
   requestServer: require('src/actions/request_server')
   receiveServer: require('src/actions/receive_server')
+  fetchFailed: require('src/actions/fetch_failed')
   fetchServer: require('src/actions/fetch_server')
 }

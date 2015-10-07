@@ -2,6 +2,7 @@ xml2js = require 'xml2js'
 utils = require 'src/utils'
 requestServer = require 'src/actions/request_server'
 receiveServer = require 'src/actions/receive_server'
+fetchFailed = require 'src/actions/fetch_failed'
 
 boolProps = 'monitor ssl'.split(' ')
 negateBoolProps = 'status'.split(' ')
@@ -64,6 +65,9 @@ module.exports = fetchServer = (url) ->
     fetch(utils.expandServerUrl url)
       .then (response) -> response.text()
       .then transformXML
-      .then (server) -> dispatch(receiveServer url, server)
+      .then(
+        (server) -> dispatch(receiveServer url, server)
+        (server) -> dispatch(fetchFailed url, server)
+      )
 
 fetchServer.transformXML = transformXML
