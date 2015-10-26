@@ -1,0 +1,27 @@
+
+//
+// Lists
+//
+
+// Unstyled keeps list items block level, just removes default browser padding and list-style
+%list-unstyled
+  padding-left: 0
+  margin-bottom: 0
+  list-style: none
+
+// Inline turns list items into inline-block
+%list-inline
+  padding-left: 0
+  margin-left: -5px
+  list-style: none
+
+  > li
+    display: inline-block
+    padding-right: 5px
+    padding-left: 5px
+
+// Horizontal description lists w/ grid classes
+%dl-horizontal
+  margin-right: -$grid-gutter-width
+  margin-left: -$grid-gutter-width
+  @include clearfix

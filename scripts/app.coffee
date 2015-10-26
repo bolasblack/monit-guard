@@ -1,9 +1,10 @@
 {connect} = require 'react-redux'
-actions = require 'src/actions'
-Host = require 'src/components/host'
-Server = require 'src/components/server'
-Process = require 'src/components/process'
-Filesystem = require 'src/components/filesystem'
+actions = require 'scripts/actions'
+Host = require 'scripts/components/host'
+Server = require 'scripts/components/server'
+Process = require 'scripts/components/process'
+Filesystem = require 'scripts/components/filesystem'
+require 'styles/app'
 
 App = React.createClass(
   componentWillMount: ->

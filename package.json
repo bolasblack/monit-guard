@@ -1,12 +1,11 @@
 {
-  "name": "react-seed",
+  "name": "monit-guard",
   "version": "0.0.1",
   "description": "",
-  "main": "index.html",
+  "main": "scripts/electron.js",
   "scripts": {
-    "test": "mocha --watch --require 'specs/spec_helper.coffee' --compilers 'coffee:coffee-script/register' 'specs/**/*_spec.coffee'",
-    "start": "gulp --debug",
-    "build": "NODE_ENV=producetion gulp fe:build"
+    "test": "jest",
+    "start": "gulp"
   },
   "keywords": [
     "monit"
@@ -15,46 +14,59 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "2.9.34",
-    "bootstrap-sass": "3.3.5",
+    "bootstrap": "twbs/bootstrap#v4.0.0-alpha",
     "menubar": "2.2.1",
     "moment": "2.10.6",
+    "preprocess": "2.3.1",
+    "preprocess-loader": "0.1.0",
     "ramda": "0.17.1",
-    "react": "0.13.3",
-    "react-bootstrap": "0.24.3",
-    "react-redux": "0.8.2",
-    "redux": "^1.0.1",
-    "redux-thunk": "0.1.0",
+    "react": "0.14.0",
+    "react-bootstrap": "0.27.1",
+    "react-dom": "0.14.0",
+    "react-redux": "4.0.0",
+    "redux-thunk": "1.0.0",
     "whatwg-fetch": "0.9.0",
     "xml2js": "0.4.10"
   },
   "devDependencies": {
-    "aliasify": "1.7.2",
-    "browserify": "11.0.1",
-    "chai": "3.2.0",
-    "coffee-reactify": "4.0.0",
-    "coffee-script": "1.9.3",
-    "electron-prebuilt": "0.33.0",
-    "event-stream": "3.3.1",
+    "coffee-jsx-loader": "0.1.3",
+    "coffee-react": "4.0.0",
+    "coffee-script": "1.10.0",
+    "css-loader": "0.19.0",
     "gulp": "3.9.0",
-    "gulp-coffee": "2.3.1",
-    "gulp-livereload": "3.8.0",
-    "gulp-preprocess": "1.2.0",
     "gulp-sass": "2.0.4",
     "gulp-util": "3.0.6",
-    "gulp-webserver": "0.9.1",
-    "livereactload": "0.6.0",
-    "lodash": "3.10.0",
-    "mocha": "2.2.5",
-    "preprocessify": "bolasblack/preprocessify#master",
-    "redux-devtools": "1.0.2",
-    "sinon": "1.15.4",
-    "sinon-chai": "2.8.0",
-    "vinyl-source-stream": "1.1.0",
-    "watchify": "3.3.1"
+    "jest-cli": "0.5.8",
+    "lodash": "3.10.1",
+    "node-sass": "3.3.3",
+    "react-addons-test-utils": "0.14.0",
+    "redux-devtools": "3.0.0-beta-3",
+    "redux-devtools-dock-monitor": "1.0.0-beta-3",
+    "redux-devtools-log-monitor": "1.0.0-beta-3",
+    "sass-loader": "3.0.0",
+    "style-loader": "0.12.4",
+    "webpack": "1.12.2",
+    "webpack-dev-server": "1.11.0",
+    "webpack-stream": "2.1.1"
   },
-  "aliasify": {
-    "aliases": {
-      "../moment": "moment"
-    }
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/jest-preprocessor.js",
+    "testFileExtensions": [
+      "sass",
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "sass",
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
   }
 }

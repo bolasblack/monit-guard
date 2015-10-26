@@ -1,9 +1,9 @@
 
 module.exports = {
-  addServer: require('src/actions/add_server')
-  removeServer: require('src/actions/remove_server')
-  requestServer: require('src/actions/request_server')
-  receiveServer: require('src/actions/receive_server')
-  fetchFailed: require('src/actions/fetch_failed')
-  fetchServer: require('src/actions/fetch_server')
+  addServer: require('scripts/actions/add_server')
+  removeServer: require('scripts/actions/remove_server')
+  requestServer: require('scripts/actions/request_server')
+  receiveServer: require('scripts/actions/receive_server')
+  fetchFailed: require('scripts/actions/fetch_failed')
+  fetchServer: require('scripts/actions/fetch_server')
 }

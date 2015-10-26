@@ -1,4 +1,4 @@
-utils = require 'src/utils'
+utils = require 'scripts/utils'
 
 module.exports = Host = React.createClass(
   _status: (item, propertyName) ->

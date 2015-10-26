@@ -1,5 +1,5 @@
 
-actions = require 'src/actions'
+actions = require 'scripts/actions'
 
 module.exports = (state, triggeredAction) ->
   resultState = state

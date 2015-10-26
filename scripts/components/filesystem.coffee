@@ -1,4 +1,4 @@
-utils = require 'src/utils'
+utils = require 'scripts/utils'
 
 module.exports = Filesystem = React.createClass(
   _status: (item, propertyName) ->
@@ -10,7 +10,7 @@ module.exports = Filesystem = React.createClass(
       <ul className="clearfix">
         {filesystems.map (fs, index) =>
           <li key={index}>
-            <strong title="(#{fs.block.usage} of #{fs.block.total})">
+            <strong title="(#{fs.block?.usage} of #{fs.block?.total})">
               <span className="dot status #{@_status fs, 'status'}">&middot;</span>
               <span className="dot monitored #{@_status fs, 'monitor'}">&middot;</span>
               <a href={"#{@props.server.url}/#{fs.name}"}>{fs.name}</a>

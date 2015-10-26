@@ -1,77 +1,47 @@
-
 _ = require 'lodash'
-es = require 'event-stream'
 http = require 'http'
-lrload = require 'livereactload'
-Promise = require 'bluebird'
-watchify = require 'watchify'
-browserify = require 'browserify'
-ChildProcess = require 'child_process'
+webpack = require 'webpack'
+webpackDevServer = require "webpack-dev-server"
+webpackConfig = require './webpack.config'
 
 gulp = require 'gulp'
 gulp_util = require 'gulp-util'
-gulp_coffee = require 'gulp-coffee'
-gulp_source = require 'vinyl-source-stream'
-gulp_webserver = require 'gulp-webserver'
+gulp_sass = require 'gulp-sass'
+gulp_webpack = require 'webpack-stream'
 
 # from https://github.com/milankinen/livereactload/blob/master/examples/05-build-systems/gulpfile.js
-gulp.task 'fe:scripts', do ->
-  gulpCommand = process.argv[2]
-  return unless _.startsWith(gulpCommand, 'fe:') or gulpCommand in ['default', '--debug', undefined]
-
-  browserifyOpts = {
-    entries: ['scripts/index.coffee']
-    extensions: ['.coffee']
-    cache: {}
-    packageCache: {}
-    fullPaths: true # for watchify
-  }
-
-  lrload.monitor 'public/scripts/app.js', displayNotification: true
-  rebundle = ->
-    gulp_util.log 'Update JavaScript bundle'
-    watcher.bundle()
-      .on 'error', gulp_util.log
-      .pipe gulp_source 'app.js'
-      .pipe gulp.dest 'public/scripts'
-  bundler = browserify(browserifyOpts)
-    .transform require('preprocessify')({
-      DEBUG: _.contains(process.argv, '--debug')
-      DEV: process.env.NODE_ENV isnt 'production'
-      PROD: process.env.NODE_ENV is 'production'
-    }, type: 'coffee', includeExtensions: ['.coffee'])
-    .transform 'coffee-reactify'
-    .transform 'aliasify'
-    .transform 'livereactload'
-  watcher = watchify(bundler).on('error', gulp_util.log).on 'update', rebundle
-
-  ->
-    rebundle()
+gulp.task 'fe:scripts', ->
+  gulp.src 'scripts/index.coffee'
+    .pipe(gulp_webpack webpackConfig)
+    .pipe gulp.dest 'public/scripts'
 
 gulp.task 'fe:styles', ->
-  gulp_sass = require 'gulp-sass'
-  gulp.src 'styles/app.sass'
+  gulp.src 'styles/vendor.sass'
     .pipe gulp_sass()
     .pipe gulp.dest 'public/styles'
 
 gulp.task 'fe:assets', ->
-  es.merge(
-    gulp.src('assets/**/*').pipe gulp.dest 'public'
-    gulp.src('package.json').pipe gulp.dest 'public'
-  )
+  gulp.src 'assets/**/*'
+    .pipe gulp.dest 'public'
 
-gulp.task 'fe:watch', ->
-  gulp.watch('scripts/**/*', ['fe:scripts'])
+gulp.task 'fe:watch', (callback) ->
   gulp.watch('styles/**/*', ['fe:styles'])
   gulp.watch('assets/**/*', ['fe:assets'])
-  gulp.src('./public').pipe gulp_webserver(
-    port: 9090
-    livereload:
-      enable: true
-      filter: (fileName) ->
-        return false if fileName.match /\.js$/
-        true
+
+  devServer = new webpackDevServer(webpack(webpackConfig),
+    hot: true
+    contentBase: './public/'
+    watchOptions:
+      aggregateTimeout: 100
+      poll: 300
+    noInfo: true
   )
+  devServer.listen 9090, "127.0.0.1", (err) ->
+    throw new gulp_util.PluginError("webpack-dev-server", err) if err
+    gulp_util.log "webpack-dev-server started at http://127.0.0.1:9090"
+    callback()
+
+  return
 
 gulp.task 'fe:build', ['fe:scripts', 'fe:styles', 'fe:assets']
 gulp.task 'default', ['fe:build', 'fe:watch']

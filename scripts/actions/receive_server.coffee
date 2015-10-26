@@ -1,4 +1,4 @@
-scheduleFetch = require 'src/actions/schedule_fetch'
+scheduleFetch = require 'scripts/actions/schedule_fetch'
 type = 'RECEIVE_SERVER'
 
 updateServer = (url, server, state) ->

@@ -1,5 +1,6 @@
 {PropTypes} = React
-utils = require 'src/utils'
+utils = require 'scripts/utils'
+require 'styles/components/server'
 
 module.exports = Server = React.createClass(
   _status: (item, keyPath) ->

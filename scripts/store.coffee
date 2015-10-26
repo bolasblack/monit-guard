@@ -1,7 +1,6 @@
 {createStore, applyMiddleware, compose} = require 'redux'
 thunkMiddleware = require 'redux-thunk'
-utils = require 'src/utils'
-reducer = require 'src/reducer'
+utils = require 'scripts/utils'
 
 defaultInitialState = do ->
   urls = utils.storage().get('urls') ? []
@@ -10,22 +9,29 @@ defaultInitialState = do ->
     fetching: true
     failed: false
 
-# @if DEBUG
-{devTools, persistState} = require 'redux-devtools'
+# @if DEV
+{persistState} = require 'redux-devtools'
+DevTools = require 'scripts/DevTools'
 createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware)
-  devTools()
+  DevTools.instrument()
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-  createStore
-)
+)(createStore)
 # @endif
 
-# @if !DEBUG
+# @if PROD
 createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware)
-  createStore
-)
+)(createStore)
 # @endif
 
 module.exports = (initialState = defaultInitialState) ->
-  createStoreWithMiddleware reducer, initialState
+  store = createStoreWithMiddleware require('scripts/reducer'), initialState
+
+# @if DEV
+  if module.hot
+    module.hot.accept './reducer', ->
+      store.replaceReducer require('scripts/reducer')
+# @endif
+
+  store

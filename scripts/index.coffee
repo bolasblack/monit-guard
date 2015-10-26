@@ -1,28 +1,29 @@
-require 'src/vendor'
+require 'scripts/vendor'
 {Provider} = require 'react-redux'
-newStore = require 'src/store'
-App = require 'src/app'
+ReactDOM = require 'react-dom'
+newStore = require 'scripts/store'
+App = require 'scripts/app'
 store = newStore()
 
-# @if DEBUG
-{DevTools, DebugPanel, LogMonitor} = require 'redux-devtools/lib/react'
-React.render(
+# @if DEV
+DevTools = require 'scripts/DevTools'
+ReactDOM.render(
   <div>
     <Provider store={store}>
-      {-> <App />}
+      <div>
+        <App />
+        <DevTools />
+      </div>
     </Provider>
-    <DebugPanel top right bottom>
-      <DevTools store={store} monitor={LogMonitor} />
-    </DebugPanel>
   </div>
   document.getElementById('app')
 )
 # @endif
-# @if !DEBUG
-React.render(
+# @if PROD
+ReactDOM.render(
   <div>
     <Provider store={store}>
-      {-> <App />}
+      <App />
     </Provider>
   </div>
   document.getElementById('app')
