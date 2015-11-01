@@ -1,5 +1,25 @@
+localStorage = do ->
+  return @localStorage if @localStorage
+
+  memoryStore = {}
+
+  getItem: (key) ->
+    memoryStore[key]
+
+  setItem: (key, val) ->
+    memoryStore[key] = val
+
+  removeItem: (key) ->
+    delete memoryStore[key]
+
+  clear: ->
+    memoryStore = {}
 
 module.exports = {
+  prod: process.env.NODE_ENV is 'production'
+  test: process.env.NODE_ENV is 'test'
+  dev: process.env.NODE_ENV not in 'production test'.split(' ')
+
   expandServerUrl: (url) ->
     "#{url.replace /\/?$/, ''}/_status?format=xml"
 
@@ -12,14 +32,14 @@ module.exports = {
   storage: ->
     get: (key) ->
       try
-        JSON.parse localStorage[key]
+        JSON.parse localStorage.getItem key
       catch
         @del key
         null
 
     set: (key, val) ->
-      localStorage[key] = JSON.stringify val
+      localStorage.setItem key, JSON.stringify(val)
 
     del: (key) ->
-      localStorage[key]
+      localStorage.removeItem key
 }

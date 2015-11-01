@@ -57,6 +57,7 @@ transformXML = (xmlString) ->
     server.filesystems = servicePropTransform filterServiceByType(0, server), 'filesystems'
 
     delete server.server
+    delete server.service
     server
 
 module.exports = fetchServer = (url) ->

@@ -4,6 +4,7 @@ Host = require 'scripts/components/host'
 Server = require 'scripts/components/server'
 Process = require 'scripts/components/process'
 Filesystem = require 'scripts/components/filesystem'
+dialog = require 'scripts/utils/dialog'
 require 'styles/app'
 
 App = React.createClass(
@@ -12,8 +13,9 @@ App = React.createClass(
       @props.dispatch actions.fetchServer server.url
 
   _addServer: ->
-    return unless url = prompt 'Input monit url'
-    @props.dispatch actions.addServer R.trim url
+    dialog.prompt('Input monit url').then (url) =>
+      return url unless url
+      @props.dispatch actions.addServer R.trim url
 
   _removeServer: (event, url) ->
     @props.dispatch actions.removeServer url

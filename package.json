@@ -4,7 +4,7 @@
   "description": "",
   "main": "scripts/electron.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_ENV=test jest --watch",
     "start": "gulp"
   },
   "keywords": [
@@ -36,7 +36,7 @@
     "gulp": "3.9.0",
     "gulp-sass": "2.0.4",
     "gulp-util": "3.0.6",
-    "jest-cli": "0.5.8",
+    "jest-cli": "0.6.1",
     "lodash": "3.10.1",
     "node-sass": "3.3.3",
     "react-addons-test-utils": "0.14.0",
@@ -65,8 +65,9 @@
       "coffee.md",
       "js"
     ],
+    "setupEnvScriptFile": "<rootDir>/scripts/vendor.coffee",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+      "/node_modules/"
     ]
   }
 }

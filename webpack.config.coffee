@@ -4,7 +4,8 @@ webpack = require 'webpack'
 
 preprocessContext = {
   PROD: process.env.NODE_ENV is 'production'
-  DEV: process.env.NODE_ENV isnt 'production'
+  DEV: process.env.NODE_ENV not in 'production test'.split(' ')
+  TEST: process.env.NODE_ENV is 'test'
 }
 
 config = {

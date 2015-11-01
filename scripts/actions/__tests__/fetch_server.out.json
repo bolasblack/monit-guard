@@ -1,0 +1,259 @@
+{
+  "platform": {
+    "name": "Linux",
+    "release": "4.1.5-x86_64-linode61",
+    "version": "#7 SMP Mon Aug 24 13:46:31 EDT 2015",
+    "machine": "x86_64",
+    "cpu": 2,
+    "memory": 2038836,
+    "swap": 2097148
+  },
+  "info": {
+    "id": "c3fffea8a2ecbae450a9a8ce893b040c",
+    "incarnation": "1445524689",
+    "version": "5.12.2",
+    "uptime": 734313,
+    "poll": 30,
+    "startdelay": 0,
+    "localhostname": "monit.example.com",
+    "controlfile": "\/etc\/monitrc",
+    "httpd": {
+      "address": "127.0.0.1",
+      "port": 2812,
+      "ssl": false
+    }
+  },
+  "system": {
+    "$": {
+      "type": "5"
+    },
+    "name": "monit.example.com",
+    "collected_sec": 1446258972,
+    "collected_usec": 889615,
+    "status": true,
+    "status_hint": "0",
+    "monitor": true,
+    "monitormode": 0,
+    "pendingaction": 0,
+    "system": {
+      "load": {
+        "avg01": "0.05",
+        "avg05": "0.03",
+        "avg15": "0.05"
+      },
+      "cpu": {
+        "user": "0.0",
+        "system": "0.0",
+        "wait": "0.0"
+      },
+      "memory": {
+        "percent": "19.3",
+        "kilobyte": 395036
+      },
+      "swap": {
+        "percent": "0.0",
+        "kilobyte": 0
+      }
+    }
+  },
+  "hosts": [
+
+  ],
+  "processes": [
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "nginx",
+      "collected_sec": 1446258972,
+      "collected_usec": 888987,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2469,
+      "ppid": 1,
+      "uid": 0,
+      "euid": 0,
+      "gid": 0,
+      "uptime": 734283,
+      "children": 1,
+      "memory": {
+        "percent": "0.0",
+        "percenttotal": "0.2",
+        "kilobyte": 956,
+        "kilobytetotal": 4708
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    },
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "postgresql",
+      "collected_sec": 1446258972,
+      "collected_usec": 889049,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2370,
+      "ppid": 1,
+      "uid": 70,
+      "euid": 70,
+      "gid": 70,
+      "uptime": 734285,
+      "children": 5,
+      "memory": {
+        "percent": "0.8",
+        "percenttotal": "2.0",
+        "kilobyte": 17176,
+        "kilobytetotal": 41020
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    },
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "redis",
+      "collected_sec": 1446258972,
+      "collected_usec": 889103,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2610,
+      "ppid": 1,
+      "uid": 75,
+      "euid": 75,
+      "gid": 75,
+      "uptime": 734275,
+      "children": 0,
+      "memory": {
+        "percent": "0.1",
+        "percenttotal": "0.1",
+        "kilobyte": 3808,
+        "kilobytetotal": 3808
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    },
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "dnscrypt-wrapper",
+      "collected_sec": 1446258972,
+      "collected_usec": 889151,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2311,
+      "ppid": 1,
+      "uid": 0,
+      "euid": 0,
+      "gid": 0,
+      "uptime": 734285,
+      "children": 0,
+      "memory": {
+        "percent": "0.1",
+        "percenttotal": "0.1",
+        "kilobyte": 2136,
+        "kilobytetotal": 2136
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    },
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "shadowsocks",
+      "collected_sec": 1446258972,
+      "collected_usec": 889197,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2491,
+      "ppid": 1,
+      "uid": 1001,
+      "euid": 1001,
+      "gid": 1001,
+      "uptime": 734283,
+      "children": 0,
+      "memory": {
+        "percent": "0.7",
+        "percenttotal": "0.7",
+        "kilobyte": 14828,
+        "kilobytetotal": 14828
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    },
+    {
+      "$": {
+        "type": "3"
+      },
+      "name": "lifemessager",
+      "collected_sec": 1446258972,
+      "collected_usec": 889251,
+      "status": true,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0,
+      "pid": 2653,
+      "ppid": 1,
+      "uid": 1003,
+      "euid": 1003,
+      "gid": 1003,
+      "uptime": 734271,
+      "children": 2,
+      "memory": {
+        "percent": "5.3",
+        "percenttotal": "15.0",
+        "kilobyte": 108548,
+        "kilobytetotal": 306132
+      },
+      "cpu": {
+        "percent": "0.0",
+        "percenttotal": "0.0"
+      }
+    }
+  ],
+  "filesystems": [
+    {
+      "$": {
+        "type": "0"
+      },
+      "name": "rootfs",
+      "collected_sec": 1446258972,
+      "collected_usec": 889612,
+      "status": false,
+      "status_hint": "0",
+      "monitor": true,
+      "monitormode": 0,
+      "pendingaction": 0
+    }
+  ]
+}
