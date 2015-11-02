@@ -4,7 +4,7 @@
   "description": "",
   "main": "scripts/electron.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest --watch --watchExtensions=coffee",
     "start": "gulp"
   },
   "keywords": [
@@ -54,17 +54,15 @@
     "testFileExtensions": [
       "sass",
       "coffee",
-      "litcoffee",
-      "coffee.md",
       "js"
     ],
     "moduleFileExtensions": [
       "sass",
       "coffee",
-      "litcoffee",
-      "coffee.md",
       "js"
     ],
+    "testPathDirs": ["<rootDir>/scripts"],
+    "verbose": true,
     "setupEnvScriptFile": "<rootDir>/scripts/vendor.coffee",
     "unmockedModulePathPatterns": [
       "/node_modules/"
